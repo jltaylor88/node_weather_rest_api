@@ -4,7 +4,8 @@ const hbs = require("hbs");
 const getGeolocation = require("../utils/geocode");
 const getWeather = require("../utils/getWeather");
 
-const PORT = 3000;
+// process.env.PORT set on Heroku. Fallback to 3000
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 const startServer = () => {
