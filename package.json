@@ -4,6 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "node index.js",
 		"watch": "nodemon -e js,hbs"
 	},
 	"keywords": [],
