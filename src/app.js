@@ -36,7 +36,7 @@ const startServer = () => {
 
 	app.get("/about", (req, res) => {
 		res.render("about", {
-			title: "About Me",
+			title: "About",
 			name: "Jason Taylor",
 			src: "/img/profile_image.jpg",
 		});
