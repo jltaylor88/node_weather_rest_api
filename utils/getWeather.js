@@ -16,9 +16,10 @@ const getWeather = async (lat, long) => {
 			},
 		});
 
-		const { current } = resp.data;
+		const { current, location } = resp.data;
+
 		// Create a ResponseError instance if there is no matching location for geolocation
-		if (!current) {
+		if (!current || !location) {
 			const errCode = "NO_DATA_FOR_COORDS";
 			throw new ResponseError(
 				`${resp.data.error.info}`,
@@ -29,9 +30,27 @@ const getWeather = async (lat, long) => {
 			);
 		}
 
-		const { weather_descriptions, temperature, feelslike } = resp.data.current;
+		const { localtime } = location;
+		const time = new Date(localtime).toLocaleTimeString("en-US");
 
-		return { weather_descriptions, temperature, feelslike };
+		const {
+			precip,
+			wind_speed,
+			weather_descriptions,
+			temperature,
+			feelslike,
+			observation_time,
+		} = current;
+
+		return {
+			time,
+			precip,
+			wind_speed,
+			weather_descriptions,
+			temperature,
+			feelslike,
+			observation_time,
+		};
 	} catch (error) {
 		throw new ResponseError(
 			`Error in getWeather: ${error.message}`,
@@ -42,4 +61,3 @@ const getWeather = async (lat, long) => {
 };
 
 module.exports = getWeather;
-

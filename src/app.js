@@ -52,15 +52,20 @@ const startServer = () => {
 
 		try {
 			const { lat, long, location } = await getGeolocation(address);
-			const { weather_descriptions, temperature, feelslike } = await getWeather(
-				lat,
-				long
-			);
+			const {
+				time,
+				observation_time,
+				wind_speed,
+				precip,
+				weather_descriptions,
+				temperature,
+				feelslike,
+			} = await getWeather(lat, long);
 
 			res.send({
 				address,
 				location,
-				forecast: `${weather_descriptions[0]}: it is currently ${temperature} degrees out in ${location}. It feels like ${feelslike} degrees out.`,
+				forecast: `${weather_descriptions[0]}: it is currently ${temperature} degrees out in ${location}. It feels like ${feelslike} degrees out. The wind speed is ${wind_speed}mph and there is ${precip}mm of precipitation. The current time is ${time} and this weather was recorded at ${observation_time}`,
 			});
 		} catch (err) {
 			res.send({ error: err.message });
