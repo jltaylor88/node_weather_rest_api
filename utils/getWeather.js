@@ -34,7 +34,7 @@ const getWeather = async (lat, long) => {
 		const time = new Date(localtime).toLocaleTimeString("en-US");
 
 		const {
-			precip,
+			humidity,
 			wind_speed,
 			weather_descriptions,
 			temperature,
@@ -44,7 +44,7 @@ const getWeather = async (lat, long) => {
 
 		return {
 			time,
-			precip,
+			humidity,
 			wind_speed,
 			weather_descriptions,
 			temperature,
